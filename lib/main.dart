@@ -12,9 +12,9 @@ class notesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       themeMode: ThemeMode.dark,
+      theme: ThemeData(fontFamily: 'Poppins', primarySwatch: Colors.blue),
       debugShowCheckedModeBanner: false,
       title: 'Flutter Notes App',
-      theme: ThemeData(primarySwatch: Colors.blue),
       home: const NotesView(),
     );
   }
