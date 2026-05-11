@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/views/widgets/add_note_button_sheet.dart';
 import 'package:note_app/views/widgets/notes_view_body.dart';
 
 class NotesView extends StatelessWidget {
@@ -7,14 +8,21 @@ class NotesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // السكافولد جواه Material بشكل تلقائي، وده اللي الـ ListTile محتاجاه
-      backgroundColor: Color(0xFF383838),
+      backgroundColor: const Color(0xFF383838),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return const AddNoteBottomSheet(); // استدعينا الكلاس اللي تحت هنا
+            },
+          );
+        },
         child: const Icon(Icons.add),
-      ),
-      body: const NotesViewBody(),
-    );
+      ), // قفلة الـ FloatingActionButton
+      body: const NotesViewBody(), // الـ body مكانه هنا تابع للـ Scaffold
+    ); // قفلة الـ Scaffold
   }
 }
+
+// تعديل بسيط في اسم الكلاس عشان يبقى أوضح (Sheet بدل Botton)
