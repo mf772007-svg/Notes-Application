@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:note_app/views/notes_view.dart';
 
 void main() {
-  runApp(const notesApp());
+  runApp(const NotesApp());
 }
 
-class notesApp extends StatelessWidget {
-  const notesApp({super.key});
+class NotesApp extends StatelessWidget {
+  const NotesApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      themeMode: ThemeMode.dark,
-      theme: ThemeData(fontFamily: 'Poppins', primarySwatch: Colors.blue),
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Notes App',
-      home: const NotesView(),
+      theme: ThemeData(
+        brightness: Brightness.dark, // عشان الـ Dark Mode
+        fontFamily: 'Poppins',
+      ),
+      home: const NotesView(), // الصفحة اللي بتبدأ الأول
     );
   }
 }

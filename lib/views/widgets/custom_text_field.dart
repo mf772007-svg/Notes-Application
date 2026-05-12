@@ -10,28 +10,28 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      cursorColor: KPrimaryColor,
+      // --- إضافة هذا السطر لتوضيح لون كلام المستخدم ---
+      style: const TextStyle(color: Colors.white, fontSize: 18),
+
+      cursorColor: kPrimaryColor,
       maxLines: maxLines,
       decoration: InputDecoration(
         hintText: hint,
+        // لون النص التوضيحي (Hint) يفضل يكون رمادي عشان يفرق عن الكلام اللي بيكتبه المستخدم
+        hintStyle: const TextStyle(color: Colors.grey),
 
-        border: buildBorder(), // هنا أنت مش باعت لون (تمام)
-        enabledBorder: buildBorder(), // هنا برضه مش باعت لون (تمام)
-        focusedBorder: buildBorder(KPrimaryColor), // هنا باعت لون (تمام)
+        border: buildBorder(),
+        enabledBorder: buildBorder(),
+        focusedBorder: buildBorder(kPrimaryColor),
       ),
     );
   }
 
-  // التعديل هنا: ضيفنا "Color?" وعلامة الاستفهام معناها إن اللون اختياري
   OutlineInputBorder buildBorder([Color? color]) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(16),
       borderSide: BorderSide(
-        color:
-            color ??
-            Colors.white.withOpacity(
-              0.5,
-            ), // لو ما جالك لون، استخدم اللون الافتراضي (تمام
+        color: color ?? Colors.white.withValues(alpha: 0.5),
       ),
     );
   }
