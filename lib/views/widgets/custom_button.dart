@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, this.onTap});
+  const CustomButton({super.key, this.onTap, this.isLoading = false});
   final void Function()? onTap; // المتغير اللي هيشيل الأكشن لما ندوس
 
+  final bool isLoading; // متغير جديد عشان نتحكم في حالة التحميل
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -15,15 +16,21 @@ class CustomButton extends StatelessWidget {
           color: const Color(0xFF62FCD7),
           borderRadius: BorderRadius.circular(16),
         ),
-        child: const Center(
-          child: Text(
-            'Add Note',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+        child: Center(
+          child: isLoading
+              ? const SizedBox(
+                  height: 24,
+                  width: 24,
+                  child: const CircularProgressIndicator(color: Colors.black),
+                )
+              : const Text(
+                  'Add Note',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
         ),
       ),
     );
