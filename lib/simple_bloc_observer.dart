@@ -1,38 +1,29 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SimpleBlocObserver implements BlocObserver {
+class SimpleBlocObserver extends BlocObserver {
   @override
-  void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
-    // TODO: implement onChange
-    debugPrint('onChange = $change');
+  void onCreate(BlocBase bloc) {
+    super.onCreate(bloc);
+    debugPrint('تـم إنـشـاء: ${bloc.runtimeType}');
   }
 
   @override
-  void onClose(BlocBase<dynamic> bloc) {
-    // TODO: implement onClose
+  void onChange(BlocBase bloc, Change change) {
+    super.onChange(bloc, change);
+    // ده هيطبع لك التغيير اللي حصل في الـ State بس باختصار
+    debugPrint('التغيير في ${bloc.runtimeType}: $change');
   }
 
   @override
-  void onCreate(BlocBase<dynamic> bloc) {
-    // TODO: implement onCreate
+  void onClose(BlocBase bloc) {
+    super.onClose(bloc);
+    debugPrint('تـم إغـلاق: ${bloc.runtimeType}');
   }
 
   @override
-  void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
-    // TODO: implement onError
-  }
-
-  @override
-  void onEvent(Bloc<dynamic, dynamic> bloc, Object? event) {
-    // TODO: implement onEvent
-  }
-
-  @override
-  void onTransition(
-    Bloc<dynamic, dynamic> bloc,
-    Transition<dynamic, dynamic> transition,
-  ) {
-    // TODO: implement onTransition
+  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+    super.onError(bloc, error, stackTrace);
+    debugPrint('خـطـأ في ${bloc.runtimeType}: $error');
   }
 }

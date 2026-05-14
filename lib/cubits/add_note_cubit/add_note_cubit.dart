@@ -10,13 +10,15 @@ class AddNoteCubit extends Cubit<AddNoteState> {
   AddNoteCubit() : super(AddNoteInitial());
 
   addNote(NoteModel note) async {
-    emit(AddNoteLoading());
+    emit(AddNoteLoading()); // دي اللي بتشغل صفحة التحميل
     try {
       var notesBox = Hive.box<NoteModel>(kNotesBox);
       await notesBox.add(note);
-      emit(AddNoteSuccess());
+      emit(AddNoteSuccess()); // لو نسيت دي.. الزرار مش هيعمل حاجة بعد الدوسة
     } catch (e) {
-      emit(AddNoteFailure(e.toString()));
+      emit(
+        AddNoteFailure(e.toString()),
+      ); // لو نسيت دي.. مش هتعرف إن فيه Error أصلاً
     }
   }
 }
