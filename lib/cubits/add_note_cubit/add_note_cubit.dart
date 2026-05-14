@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
@@ -6,10 +7,16 @@ import 'package:note_app/views/widgets/constans.dart';
 import 'package:equatable/equatable.dart';
 
 // الربط بملف الـ States
+=======
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+
+>>>>>>> 10f8cd8491f4e93b10696d0b2c8d7db871df8bc3
 part 'add_note_state.dart';
 
 class AddNoteCubit extends Cubit<AddNoteState> {
   AddNoteCubit() : super(AddNoteInitial());
+<<<<<<< HEAD
 
   // دالة إضافة الملاحظة
   addNote(NoteModel note) async {
@@ -26,4 +33,6 @@ class AddNoteCubit extends Cubit<AddNoteState> {
       emit(AddNoteFailure(e.toString()));
     }
   }
+=======
+>>>>>>> 10f8cd8491f4e93b10696d0b2c8d7db871df8bc3
 }
