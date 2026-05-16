@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart'; // سطر الإنقاذ اللي ناقصك!
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_app/cubits/add_note_cubit/add_note_cubit.dart';
@@ -16,25 +17,6 @@ class _AddNoteFormState extends State<AddNoteForm> {
   final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   String? title, content;
-
-  String _formatNoteDate(DateTime date) {
-    const monthNames = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-
-    return '${monthNames[date.month - 1]} ${date.day}, ${date.year}';
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,11 +46,16 @@ class _AddNoteFormState extends State<AddNoteForm> {
               if (formKey.currentState!.validate()) {
                 formKey.currentState?.save();
 
-                final now = DateTime.now();
+                var currentDate = DateTime.now();
+                // هنا الـ DateFormat هيشتغل طالما عملنا الـ import فوق
+                var formattedCurrentDate = DateFormat(
+                  'yyyy-MM-dd',
+                ).format(currentDate);
+
                 var noteModel = NoteModel(
                   title: title!,
                   content: content!,
-                  date: _formatNoteDate(now),
+                  date: formattedCurrentDate,
                   color: const Color(0xFFB74EFD).value,
                 );
 
