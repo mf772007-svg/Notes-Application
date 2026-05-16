@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:note_app/cubits/notes_cubit/notes_cubit.dart';
+import 'package:note_app/models/note_model.dart';
 import 'package:note_app/views/widgets/constans.dart';
 import 'package:note_app/views/widgets/note_item.dart';
 
@@ -7,26 +10,37 @@ class NotesListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      child: ListView.builder(
-        padding: EdgeInsets.zero,
-        // BouncingScrollPhysics بتخلي الـ Scroll يرتد لما يوصل للنهاية (زي iOS)
-        physics: const BouncingScrollPhysics(),
-        itemCount: 16,
-        itemBuilder: (context, index) {
+    return BlocBuilder<NotesCubit, NotesState>(
+      builder: (context, state) {
+        if (state is NotesLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is NotesSuccess) {
+          List<NoteModel> notes = state.notes;
+
           return Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 8,
-            ), // مسافة كافية عشان الـ Shadow (التوهج) يظهر بوضوح
-            child: NoteItem(
-              // بنمرر الـ index الفعلي عشان الـ Hero Tag يكون فريد
-              index: index,
-              gradientModel: kGradients[index % kGradients.length],
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              physics: const BouncingScrollPhysics(),
+              itemCount: notes.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: NoteItem(
+                    index: index,
+                    gradientModel: kGradients[index % kGradients.length],
+                    note: notes[index],
+                  ),
+                );
+              },
             ),
           );
-        },
-      ),
+        } else if (state is NotesFailure) {
+          return Center(child: Text('Error: ${state.errorMessage}'));
+        } else {
+          return const Center(child: Text('No notes'));
+        }
+      },
     );
   }
 }

@@ -13,7 +13,6 @@ final class NotesLoading extends NotesState {}
 
 final class NotesSuccess extends NotesState {
   final List<NoteModel> notes;
-
   const NotesSuccess(this.notes);
 
   @override
@@ -22,6 +21,8 @@ final class NotesSuccess extends NotesState {
 
 final class NotesFailure extends NotesState {
   final String errorMessage;
-
   const NotesFailure(this.errorMessage);
+
+  @override
+  List<Object> get props => [errorMessage];
 }

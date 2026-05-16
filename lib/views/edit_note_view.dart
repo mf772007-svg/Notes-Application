@@ -8,11 +8,14 @@ class EditNoteViewBody extends StatelessWidget {
     required this.index,
     required this.title,
     required this.content,
+
+    required this.date,
   });
 
   final int index;
   final String title;
   final String content;
+  final String date;
 
   @override
   Widget build(BuildContext context) {

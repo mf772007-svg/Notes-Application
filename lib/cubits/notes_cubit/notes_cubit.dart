@@ -7,14 +7,18 @@ import 'package:note_app/views/widgets/constans.dart';
 part 'notes_state.dart';
 
 class NotesCubit extends Cubit<NotesState> {
-  NotesCubit() : super(NotesInitial());
+  NotesCubit() : super(NotesInitial()) {
+    fetchAllNotes();
+  }
+
+  List<NoteModel>? notes;
 
   fetchAllNotes() async {
+    emit(NotesLoading());
     try {
       var notesBox = Hive.box<NoteModel>(kNotesBox);
-      List<NoteModel> notes = notesBox.values
-          .toList(); // جلب كل الملاحظات من الصندوق
-      emit(NotesSuccess(notes));
+      notes = notesBox.values.toList();
+      emit(NotesSuccess(notes!));
     } catch (e) {
       emit(NotesFailure(e.toString()));
     }

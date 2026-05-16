@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_app/cubits/add_note_cubit/add_note_cubit.dart';
-import 'package:note_app/cubits/notes_cubit/notes_cubit.dart';
+import 'package:note_app/cubits/notes_cubit/notes_cubit.dart'; // تعديل المسار لـ sheet بدلاً من button
 import 'package:note_app/views/widgets/add_note_button_sheet.dart';
 import 'package:note_app/views/widgets/notes_view_body.dart';
 
@@ -32,11 +32,9 @@ class NotesView extends StatelessWidget {
             );
           },
           child: const Icon(Icons.add),
-        ), // قفلة الـ FloatingActionButton
-        body: const NotesViewBody(), // الـ body مكانه هنا تابع للـ Scaffold
+        ),
+        body: const NotesViewBody(),
       ),
-    ); // قفلة الـ Scaffold
+    );
   }
 }
-
-// تعديل بسيط في اسم الكلاس عشان يبقى أوضح (Sheet بدل Botton)
